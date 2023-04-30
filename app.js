@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let passport = require("passport"); 
 const flash = require('connect-flash');
 const session = require('express-session');
+let methodOverride = require("method-override"); 
 
 require('dotenv').config(); 
 
@@ -13,7 +14,7 @@ require('./passport-config')(passport);
 //express session 
 
 app.use(session({
-    'secret' : process.env.SECRET,
+    secret : process.env.SECRET,
     resave: false,
     saveUninitialized : false
 })); 
@@ -22,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash()); 
-
+app.use(methodOverride('_method'));
 
 app.set("view engine", "ejs"); 
 

@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let passport = require("passport"); 
 let bcrypt = require("bcrypt"); 
 
+
 let userModel = require('../models/user'); 
 
 let router = express.Router(); 
@@ -20,6 +21,10 @@ router.get('/register',isNotAuthenticated,  (req, res)=>{
     res.render("register");
 })
 
+router.delete('/logout', (req, res)=>{
+    req.logOut(); 
+    res.redirect('/login')
+})
 
 router.post('/login', passport.authenticate('local', {
     successRedirect : '/',
